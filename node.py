@@ -5,7 +5,7 @@ class Node:
         self._dps = {'s': set(), 't': set()}
         self._name = name
 
-    def recognize_connection(self, relative, dp, connection_type):
+    def process_connection(self, relative, dp, connection_type):
         self._dps[connection_type].add(dp)
         self._connections.add(relative)
 

@@ -14,8 +14,8 @@ class Graph:
 
     def process_connection(self, dp, source, target):
         self._ensure_nodes([source, target])
-        self._nodes[source].recognize_connection(target, dp, 's')
-        self._nodes[target].recognize_connection(source, dp, 't')
+        self._nodes[source].process_connection(target, dp, 's')
+        self._nodes[target].process_connection(source, dp, 't')
 
     def get_nodes(self):
         return self._nodes
