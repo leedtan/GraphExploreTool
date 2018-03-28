@@ -1,26 +1,30 @@
 
 import json
 import pandas as pd
-from utils import build_forward_backward_hash
 from graph import Graph
 
-with open('data') as handle:
-    dictdump = json.loads(handle.read())
 
-graph = Graph()
-df = pd.DataFrame(dictdump)
+def _read_data(filename):
 
-source_usrs = set(df['source'].unique())
-target_usrs = set(df['target'].unique())
-all_uni_usrs = source_usrs.union(target_usrs)
+    with open(filename) as handle:
+        dictdump = json.loads(handle.read())
 
-usr2idx, idx2usr = build_forward_backward_hash(all_uni_usrs)
+    df = pd.DataFrame(dictdump)
+    return df
 
 
-for idx in range(df.shape[0]):
-    if idx % 10000 == 0:
-        print('%d of %d, progress: %.3f percent ' %
-              (idx, df.shape[0], idx / df.shape[0]))
-    graph.process_connection(*df.loc[idx, :])
+def _build_graph(df):
 
-graph.save('graph.pkl')
+    graph = Graph()
+    num_rows = df.shape[0]
+    for idx in range(num_rows):
+        if idx % 50000 == 0:
+            print('%d of %d, %.3f percent ' % (idx, num_rows, idx / num_rows))
+        graph.process_connection(*df.loc[idx, :])
+
+    graph.save('graph.pkl')
+
+
+def pre_process_graph():
+    df = _read_data('oceania_citizen_relationships_2m.json')
+    _build_graph(df)

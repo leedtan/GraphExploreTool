@@ -5,17 +5,26 @@ import pickle
 
 class Graph:
     def __init__(self):
-        self.nodes = {}
+        self._nodes = {}
 
-    def ensure_nodes(self, nodes):
-        for node_name in nodes:
-            if node_name not in self.nodes:
-                self.nodes[node_name] = Node()
+    def _ensure_nodes(self, node_names):
+        for node_name in node_names:
+            if node_name not in self._nodes:
+                self._nodes[node_name] = Node(node_name)
 
     def process_connection(self, dp, source, target):
-        self.ensure_nodes([source, target])
-        self.nodes[source].recognize_connection(target, dp, 's')
-        self.nodes[target].recognize_connection(source, dp, 't')
+        self._ensure_nodes([source, target])
+        self._nodes[source].recognize_connection(target, dp, 's')
+        self._nodes[target].recognize_connection(source, dp, 't')
+
+    def get_nodes(self):
+        return self._nodes
+
+    def get_node(self, nodename):
+        if nodename in self._nodes:
+            return self._nodes[nodename]
+        else:
+            raise ValueError(nodename + ' not in graph')
 
     def save(self, name):
         with open(name, mode='wb') as f:
