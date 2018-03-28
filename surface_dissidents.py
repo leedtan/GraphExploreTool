@@ -81,16 +81,10 @@ def node_passes(node, relation_str, operator_type, boundary):
         return boundary in active_dps
 
     if operator_type == '>':
-        for dp in active_dps:
-            if dp > boundary:
-                return True
-        return False
+        return max(active_dps) > boundary
 
     if operator_type == '<':
-        for dp in active_dps:
-            if dp < boundary:
-                return True
-        return False
+        return min(active_dps) < boundary
 
 
 def report_dissidents(dissident_nodes):
