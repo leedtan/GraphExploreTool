@@ -52,7 +52,7 @@ if __name__ == '__main__':
             print("incorrect format")
             continue
         relation_str, operator_type, boundary = rule_processed
-        explored_nodes = explore_graph.explore_graph(
+        explored_nodes = explore_graph(
             root_node, distance, graph)
         dissident_nodes = set()
         for node in explored_nodes:

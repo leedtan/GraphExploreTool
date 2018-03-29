@@ -4,7 +4,7 @@ import re
 def _process_rule(rule):
 
     if not re.match(
-            '(SENT_OR_RECEIVED|SENT|RECEIVED)\((<>|>|<)[\.0-9]*\)',
+            '(SENT_OR_RECEIVED|SENT|RECEIVED)\((<>|>|<)-?[\.0-9]*\)',
             rule):
         return False
 
