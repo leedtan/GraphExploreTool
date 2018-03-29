@@ -5,7 +5,7 @@ import pickle
 import re
 import prepare_graph
 from explore_graph import explore_graph
-from handle_text_utils import process_stiring, node_meets_rule, report_dissidents
+from handle_text_utils import process_string, node_meets_rule, report_dissidents
 
 
 if __name__ == '__main__':

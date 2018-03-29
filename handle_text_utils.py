@@ -71,6 +71,3 @@ def report_dissidents(dissident_nodes):
     else:
         print('Dissidents found!')
         print(dissident_nodes)
-
-
-l
