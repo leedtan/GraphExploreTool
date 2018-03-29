@@ -1,3 +1,5 @@
+import re
+
 
 def _process_rule(rule):
 
